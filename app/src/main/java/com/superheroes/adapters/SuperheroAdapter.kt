@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.superheroes.R
 import com.superheroes.data.SuperheroItem
 import com.superheroes.databinding.ItemSuperheroBinding
@@ -34,6 +35,6 @@ class SuperheroViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
     fun bind(superheroItem: SuperheroItem) {
         itemSuperheroBinding.name.text = superheroItem.name
-       // itemSuperheroBinding.imgHero.setImageResource(superheroItem.superheroImage)
+        Picasso.get().load(superheroItem.superheroImage.url).into(itemSuperheroBinding.imgHero);
     }
 }
