@@ -30,5 +30,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val id = intent.getStringExtra(EXTRA_SUPERHERO_ID)!!
+        println(id)
     }
 }

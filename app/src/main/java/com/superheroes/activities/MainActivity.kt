@@ -1,5 +1,6 @@
 package com.superheroes.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,7 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.superheroes.R
+import com.superheroes.activities.DetailActivity.Companion.EXTRA_SUPERHERO_ID
 import com.superheroes.adapters.SuperHeroAdapter
+import com.superheroes.data.SuperheroItem
 import com.superheroes.databinding.ActivityMainBinding
 import com.superheroes.services.SuperheroService
 import com.superheroes.utils.RetrofitProvider
@@ -45,7 +48,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init () {
-        adapterSuperhero = SuperHeroAdapter()
+        adapterSuperhero = SuperHeroAdapter() { superheroItem ->
+            onItemSelect(superheroItem)
+        }
         binding.rvSuperheroes.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = adapterSuperhero
@@ -68,6 +73,12 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean = false
         })
         return true
+    }
+
+    private fun onItemSelect(superheroItem: SuperheroItem) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(EXTRA_SUPERHERO_ID, superheroItem.id)
+        startActivity(intent)
     }
 
     private fun searchByName (name: String) {

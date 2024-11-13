@@ -9,7 +9,8 @@ import com.superheroes.R
 import com.superheroes.data.SuperheroItem
 import com.superheroes.databinding.ItemSuperheroBinding
 
-class SuperHeroAdapter(private var superheros: List<SuperheroItem> = emptyList()): RecyclerView.Adapter<SuperheroViewHolder>() {
+class SuperHeroAdapter(private var superheros: List<SuperheroItem> = emptyList(),
+                       private val onClickListener: (SuperheroItem) -> Unit): RecyclerView.Adapter<SuperheroViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperheroViewHolder {
         return SuperheroViewHolder(
@@ -20,7 +21,7 @@ class SuperHeroAdapter(private var superheros: List<SuperheroItem> = emptyList()
     override fun getItemCount() = superheros.size
 
     override fun onBindViewHolder(holder: SuperheroViewHolder, position: Int) {
-        holder.bind(superheros[position])
+        holder.bind(superheros[position], onClickListener)
     }
 
     fun updateSuperheroes (list: List<SuperheroItem>) {
@@ -33,8 +34,11 @@ class SuperheroViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
     private val itemSuperheroBinding = ItemSuperheroBinding.bind(view)
 
-    fun bind(superheroItem: SuperheroItem) {
+    fun bind(superheroItem: SuperheroItem, onClickListener: (SuperheroItem) -> Unit) {
         itemSuperheroBinding.name.text = superheroItem.name
         Picasso.get().load(superheroItem.superheroImage.url).into(itemSuperheroBinding.imgHero);
+        itemView.setOnClickListener {
+            onClickListener(superheroItem)
+        }
     }
 }
