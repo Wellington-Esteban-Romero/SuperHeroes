@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init () {
+
+        getActionBarSuperHero()
+
         adapterSuperhero = SuperHeroAdapter() { superheroItem ->
             onItemSelect(superheroItem)
         }
@@ -56,6 +59,17 @@ class MainActivity : AppCompatActivity() {
             adapter = adapterSuperhero
             hasFixedSize()
         }
+    }
+
+     private fun getActionBarSuperHero ():Unit {
+        val actionBar = supportActionBar
+        actionBar!!.title = "SuperHeroes"
+        actionBar!!.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
