@@ -21,6 +21,11 @@ class SuperHeroAdapter(private var superheros: List<SuperheroItem> = emptyList()
     override fun onBindViewHolder(holder: SuperheroViewHolder, position: Int) {
         holder.bind(superheros[position])
     }
+
+    fun updateSuperheroes (list: List<SuperheroItem>) {
+        superheros = list
+        notifyDataSetChanged()
+    }
 }
 
 class SuperheroViewHolder(view:View) : RecyclerView.ViewHolder(view) {

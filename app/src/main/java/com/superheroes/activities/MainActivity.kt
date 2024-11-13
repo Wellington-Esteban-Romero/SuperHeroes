@@ -1,6 +1,7 @@
-package com.superheroes
+package com.superheroes.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
@@ -8,16 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.RecyclerView
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
+import com.superheroes.R
 import com.superheroes.adapters.SuperHeroAdapter
-import com.superheroes.data.SuperheroResponse
 import com.superheroes.databinding.ActivityMainBinding
 import com.superheroes.services.SuperheroService
 import com.superheroes.utils.RetrofitProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,9 +45,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init () {
-
         adapterSuperhero = SuperHeroAdapter()
-        adapterSuperhero
+        binding.rvSuperheroes.apply {
+            layoutManager = GridLayoutManager(this@MainActivity, 2)
+            adapter = adapterSuperhero
+            hasFixedSize()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,8 +71,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchByName (name: String) {
+        binding.progressBar.isVisible = true
         CoroutineScope(Dispatchers.IO).launch {
-            //val response:Response<SuperheroResponse> = superheroesService.findSuperheroesByName(name)
+            val response = superheroesService.findSuperheroesByName(name)
+
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                if (responseBody != null) {
+                    Log.i("Superheroes", responseBody.toString())
+                    runOnUiThread {
+                        adapterSuperhero.updateSuperheroes(responseBody.superheros)
+                        binding.progressBar.isVisible = false
+                    }
+                }
+            }
         }
     }
 
