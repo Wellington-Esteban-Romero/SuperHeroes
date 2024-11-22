@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import com.superheroes.R
 import com.superheroes.data.SuperheroDetailsResponse
 import com.superheroes.databinding.ActivityDetailBinding
@@ -23,6 +25,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var superheroesService: SuperheroService
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var tabLayout:TabLayout
 
 
     companion object {
@@ -42,12 +45,40 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
+        init()
+
         superheroesService =   RetrofitProvider.getRetrofit()
 
         val id = intent.getStringExtra(EXTRA_SUPERHERO_ID).orEmpty()
         getDataSuperhero(id)
         println(id)
     }
+
+    private fun init () {
+        binding.tabSuperhero
+        tabLayout = findViewById(R.id.tabSuperhero)
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                // Handle tab select
+                print(tab)
+
+                if (tab?.position == 1)
+                    tab.setContentDescription("xxdasdasdas")
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // Handle tab reselect
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // Handle tab unselect
+            }
+        })
+    }
+
+
 
     private fun getDataSuperhero (id: String) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -59,15 +90,15 @@ class DetailActivity : AppCompatActivity() {
                     Log.i("Superheroe", responseBody.toString())
 
                     runOnUiThread {
-
+                        createDetails(responseBody)
                     }
-
                 }
             }
         }
     }
 
-    private fun createUI (supehero: SuperheroDetailsResponse) {
-
+    private fun createDetails (supehero: SuperheroDetailsResponse) {
+        Picasso.get().load(supehero.superheroImage.url).into(binding.imgSuperheroDetail)
+        binding.superheroName.text = supehero.name
     }
 }

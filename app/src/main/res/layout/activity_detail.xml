@@ -7,11 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".activities.DetailActivity">
 
+    <TextView
+        android:id="@+id/superheroName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        tools:text="prueba"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:background="@color/superhero_item_name"
+        tools:ignore="MissingConstraints">
+    </TextView>
+
     <ImageView
         android:id="@+id/imgSuperheroDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="260dp"
         android:scaleType="centerCrop"
+        android:layout_marginTop="38dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -22,14 +35,44 @@
         android:id="@+id/cardSuperheroDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/superhero_item_name"
+        app:cardCornerRadius="22dp"
         app:layout_constraintTop_toTopOf="@id/imgSuperheroDetail"
         app:layout_constraintStart_toStartOf="@id/imgSuperheroDetail"
         android:layout_marginTop="250dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         >
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabSuperhero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Poderes"
+                    />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Biografía"
+                    />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apariencia"
+                    />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trabajo"
+                    />
+
+            </com.google.android.material.tabs.TabLayout>
 
     </androidx.cardview.widget.CardView>
 

@@ -5,4 +5,5 @@
 
 
     <color name="superhero_item_name">#9F00BCD4</color>
+    <color name="superhero_details">#F700BCD4</color>
 </resources>

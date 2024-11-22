@@ -43,6 +43,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.google.android.material:material:1.0.5")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
