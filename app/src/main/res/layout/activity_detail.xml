@@ -6,16 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.DetailActivity">
-    
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-    </Button>
+    <ImageView
+        android:id="@+id/imgSuperheroDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </ImageView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSuperheroDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/superhero_item_name"
+        app:layout_constraintTop_toTopOf="@id/imgSuperheroDetail"
+        app:layout_constraintStart_toStartOf="@id/imgSuperheroDetail"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        >
+
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

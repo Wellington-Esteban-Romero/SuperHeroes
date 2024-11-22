@@ -67,10 +67,10 @@ class MainActivity : AppCompatActivity() {
         actionBar!!.setDisplayShowHomeEnabled(true)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
+    //override fun onSupportNavigateUp(): Boolean {
+        //onBackPressed()
+        //return true
+    //}
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
